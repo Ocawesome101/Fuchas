@@ -341,6 +341,7 @@ function spec.new(address)
 	        hardwareBuffers = hasBufs
 	    }
 	end
+	setmetatable(drv,{__metatable={},__newindex=function()error"drivers are read-only"end})
 	return drv
 end
 
