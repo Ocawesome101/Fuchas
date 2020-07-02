@@ -122,7 +122,7 @@ function mod.scheduler()
 		end)
 	end
 	if mod.getCurrentProcess() ~= nil then
-		error("only system can use shin32.scheduler()")
+		error("only system can use tasks.scheduler()")
 	end
 	
 	local measure = computer.uptime
@@ -285,7 +285,7 @@ function mod.unsafeKill(proc)
 		require("security").revoke(proc.pid)
 	end
 	for k, v in pairs(proc.exitHandlers) do
-		v()
+		pcall(v)
 	end
 	proc.io.stdout:close()
 	proc.io.stdin:close()
@@ -325,5 +325,10 @@ function mod.getProcesses()
 		error("missing permission: scheduler.list")
 	end
 end
+
+setmetatable(mod, {
+		__newindex = function() error "tasks is read only" end,
+		__metatable = {}
+})
 
 return mod
