@@ -49,4 +49,9 @@ function lib.socket(target, id)
 	return socket
 end
 
+setmetatable(lib, {
+		__newindex = function() error "ipc library is read-only" end,
+		__metatable = {}
+})
+
 return lib
