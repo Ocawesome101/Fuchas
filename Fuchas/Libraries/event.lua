@@ -187,4 +187,9 @@ function event.ignore(name, callback)
   return false
 end
 
+setmetatable(event, {
+		__newindex = function() error "event is read-only" end,
+		__metatable = {}
+})
+
 return event
