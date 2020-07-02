@@ -440,4 +440,11 @@ filesystem.segments = segments
 
 -------------------------------------------------------------------------------
 
+setmetatable(filesystem, {
+		__newindex = function() error "filesystem library is read-only" end,
+		__metatable = {}
+})
+
+-------------------------------------------------------------------------------
+
 return filesystem
